@@ -1,0 +1,15 @@
+{
+    "app": {
+        "port": 3000,
+        "host": "localhost"
+    },
+    "microservices": {
+        "customerService": {
+            "host": "localhost",
+            "port": 3001
+        }
+    },
+    "jwt": {
+        "secret": "HmW1oLe30Ls4Rc760fQw0a2puI10R3LGRQ3zNuwy"
+    }
+}
