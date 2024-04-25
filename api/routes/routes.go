@@ -10,4 +10,5 @@ func SetAllRoutes(app *fiber.App) {
 	// Customer routes
 	customerRoutes := app.Group("/api/v1/customer")
 	customerRoutes.Post("/", controllers.InsertNewCustomer)
+	customerRoutes.Get("/:id", controllers.GetCustomerById)
 }
