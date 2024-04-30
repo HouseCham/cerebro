@@ -11,11 +11,6 @@ import (
 
 var customerGrpcClient CustomerClient
 
-// SetUpGrpcConnections is a function that sets up all the gRPC connections to all microservices
-func SetUpGrpcConnections() {
-	SetUpCostumerClient()
-}
-
 // SetUpCostumerClient is a function that sets up the gRPC connection to the costumer service
 func SetUpCostumerClient() {
 	// Setting up costumer gRPC connection

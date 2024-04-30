@@ -13,6 +13,9 @@ import (
 )
 
 func main() {
+	// Setting up logger
+	log.SetUpLogger()
+	
 	// Setting up config file
 	log.Logger.Infoln("Setting up config file")
 	err := config.GetConfigFile()
