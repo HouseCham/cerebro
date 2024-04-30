@@ -10,6 +10,6 @@
         }
     },
     "jwt": {
-        "secret": "HmW1oLe30Ls4Rc760fQw0a2puI10R3LGRQ3zNuwy"
+        "secret": ""
     }
 }
