@@ -81,7 +81,7 @@ To build the Docker images for Cerebro, follow these steps:
 1. Clone the Cerebro repository:
 
    ```bash
-   git clone https://github.com/yourusername/cerebro.git
+   git clone https://github.com/HouseCham/cerebro.git
    ```
 
 2. Navigate to the project directory:
