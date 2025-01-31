@@ -1,33 +1,26 @@
-FROM golang:1.21-bullseye as build
-
+FROM golang:1.21-bullseye AS build
 WORKDIR /app
-
-RUN useradd -u 2002 cerebro_user
-
 COPY go.mod go.sum ./
-
-RUN --mount=type=cache,target=/go/pkg/mod \
-    --mount=type=cache,target=/root/.cache/go-build \
-    go mod download
-
+RUN go mod download && \
+    go mod verify && \
+    go mod tidy
 COPY . .
+RUN go build -o main ./cmd/main.go
 
-RUN go build \
-    -ldflags "-linkmode external -extldflags -static" \
-    -tags netgo \
-    -o cerebro-service ./cmd
+# Build the Go application
+RUN go build -o main ./cmd/main.go
 
-###
-FROM scratch
+# Final stage: create a smaller image with only the built binary
+FROM --platform=$BUILDPLATFORM alpine:3.20 AS final
 
-COPY --from=build /etc/passwd /etc/passwd
+# Set working directory
+WORKDIR /root/
 
-COPY --from=build /app/cerebro-service cerebro-service
+# Copy the configuration file
+COPY ./config.json .
 
-COPY config.json /config.json
+# Copy the compiled binary from the build stage
+COPY --from=build /app/main .
 
-USER cerebro_user
-
-EXPOSE 3000
-
-CMD ["/cerebro-service"]
+# Set the default command to run the application
+CMD ["./main"]
