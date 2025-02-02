@@ -7,9 +7,6 @@ RUN go mod download && \
 COPY . .
 RUN go build -o main ./cmd/main.go
 
-# Build the Go application
-RUN go build -o main ./cmd/main.go
-
 # Final stage: create a smaller image with only the built binary
 FROM --platform=$BUILDPLATFORM alpine:3.20 AS final
 

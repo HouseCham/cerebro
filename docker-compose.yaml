@@ -1,0 +1,30 @@
+services:
+  db:
+    container_name: ${DIPINTO_DB_CONTAINER_NAME}
+    image: postgres:17.0-alpine3.20
+    volumes:
+      - dipinto-db:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_PASSWORD=${DIPINTO_DB_PASSWORD}
+  
+  customerService:
+    depends_on:
+      - db
+    container_name: ${CUSTOMER_SERVICE_NAME}
+    image: chamito/customer-service:1.1.0
+    ports:
+      - "3001:3001"
+  
+  cerebro:
+    container_name: ${CEREBRO_NAME}
+    depends_on:
+      - customerService
+    image: chamito/cerebro:1.1.0
+    ports:
+      - "3000:3000"
+
+volumes: 
+  dipinto-db:
+    external: true

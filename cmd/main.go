@@ -3,10 +3,10 @@ package main
 import (
 	"fmt"
 
+	"github.com/HouseCham/cerebro/api/core/grpc"
 	"github.com/HouseCham/cerebro/api/routes"
 	"github.com/HouseCham/cerebro/internal/config"
 	"github.com/HouseCham/cerebro/internal/log"
-	"github.com/HouseCham/cerebro/api/core/grpc"
 
 	"github.com/gofiber/fiber/v3"
 	"github.com/gofiber/fiber/v3/middleware/cors"
